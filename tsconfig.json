@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    // Specify ECMAScript target version
+    "target": "ES2020", // Compiles TypeScript to ES2020 JavaScript
+
+    // Specify module code generation method
+    "module": "CommonJS", // Used in Node.js environments
+
+    // Directory for compiled JavaScript output
+    "outDir": "./dist", // Output directory for compiled files
+
+    // Root folder of your TypeScript source files
+    "rootDir": "./src", // Specifies where TypeScript files are located
+
+    // Enable all strict type-checking options
+    "strict": true, // Enforces strict null checks, etc.
+
+    // Allow default imports from modules with no default export
+    "esModuleInterop": true, // Helps interop with CommonJS modules like Express
+
+    // Skip type checking of all declaration files (*.d.ts)
+    "skipLibCheck": true, // Speeds up compilation, useful for node_modules
+
+    // Disallow inconsistently-cased references to the same file
+    "forceConsistentCasingInFileNames": true, // Prevents case-related import errors
+
+    // Enables support for ES decorators (used in tsoa, tsyringe, etc.)
+    "experimentalDecorators": true,
+
+    // Emit design-type metadata for decorators (required by tsoa and DI containers)
+    "emitDecoratorMetadata": true
+  },
+  // Files/folders to include in compilation
+  "include": ["src"],
+
+  // Files/folders to exclude from compilation
+  "exclude": ["node_modules"]
+}

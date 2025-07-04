@@ -1,0 +1,196 @@
+openapi: 3.0.0
+components:
+  examples: {}
+  headers: {}
+  parameters: {}
+  requestBodies: {}
+  responses: {}
+  schemas:
+    User:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+      required:
+        - id
+        - name
+        - email
+      type: object
+      additionalProperties: false
+    Pick_User.Exclude_keyofUser.id__:
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+      required:
+        - name
+        - email
+      type: object
+      description: From T, pick a set of properties whose keys are in the union K
+    Omit_User.id_:
+      $ref: "#/components/schemas/Pick_User.Exclude_keyofUser.id__"
+      description: Construct a type with the properties of T except for those in type K.
+    Partial_User_:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+      type: object
+      description: Make all properties in T optional
+  securitySchemes: {}
+info:
+  title: typescript-express
+  version: 1.0.0
+  license:
+    name: ISC
+  contact: {}
+paths:
+  /users:
+    get:
+      operationId: GetUsers
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/User"
+                type: array
+      tags:
+        - User
+      security: []
+      parameters: []
+    post:
+      operationId: CreateUser
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      tags:
+        - User
+      security: []
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Omit_User.id_"
+  /users/id/{id}:
+    get:
+      operationId: GetUser
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      tags:
+        - User
+      security: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+  /users/{id}:
+    put:
+      operationId: UpdateUser
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+      tags:
+        - User
+      security: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Partial_User_"
+    delete:
+      operationId: DeleteUser
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  success:
+                    type: boolean
+                required:
+                  - success
+                type: object
+      tags:
+        - User
+      security: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+  /users/search:
+    get:
+      operationId: SearchUser
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - User
+      security: []
+      parameters:
+        - in: query
+          name: searchBy
+          required: true
+          schema:
+            type: string
+  /health:
+    get:
+      operationId: Healthcheck
+      responses:
+        "200":
+          description: Ok
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    type: string
+                required:
+                  - status
+                type: object
+      tags:
+        - Helpers
+      security: []
+      parameters: []
+servers:
+  - url: /

@@ -1,0 +1,18 @@
+{
+    "entryFile": "src/index.ts",
+    "noImplicitAdditionalProperties": "silently-remove-extras",
+    "controllerPathGlobs": [
+      "src/controllers/*.ts"
+    ],
+    "spec": {
+      "outputDirectory": "docs",
+      "specFileBaseName": "openapi_spec",
+      "specVersion": 3,
+      "basePath": "/",
+      "yaml": true
+    },
+    "routes": {
+      "routesDir": "src/routes"
+    }
+  }
+  
